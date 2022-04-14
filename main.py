@@ -4,13 +4,14 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from datetime import date, timedelta
+import math
 
 class Store:
     # Variables de clase
 
     Warehouse = dict()
     Warehouse = {
-        'store_1': {"open_cases": 4, "closed_cases": 10},
+        'store_1': {"open_cases": 44, "closed_cases": 33},
         'store_2': {"open_cases": 22, "closed_cases": 5}
     }
 
@@ -25,11 +26,13 @@ class Store:
         stats_store = []
 
         for i in self.Warehouse:
+            diff = current_date - old_date
+
             open_cases = self.Warehouse[i]['open_cases']
             closed_cases = self.Warehouse[i]['closed_cases']
             n_cases = open_cases + closed_cases
-            average_solved_cases = round(closed_cases / n_cases)
-            max_current_solution = (open_cases / n_cases)
+            average_solved_cases = math.ceil(closed_cases / int(diff.days))
+            max_current_solution = math.ceil(open_cases / int(diff.days))
 
             stats_store.append(
                 {
